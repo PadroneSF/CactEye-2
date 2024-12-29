@@ -1,22 +1,27 @@
 {
 	"NAME": "CactEye Telescopes",
-	"URL": "http://ksp.spacetux.net/avc/CactEyeCommunityRefocused.version",
+	"URL": "https://raw.githubusercontent.com/linuxgurugamer/CactEye-2/refs/heads/master/CactEyeCommunityRefocused.version",
 	"DOWNLOAD": "https://github.com/linuxgurugamer/CactEye-2/releases",
 	"CHANGE_LOG_URL": "https://github.com/linuxgurugamer/CactEye-2/releases",
 	"VERSION": {
 		"MAJOR": 1,
 		"MINOR": 5,
-		"PATCH": 2,
-		"BUILD": 8
+		"PATCH": 0,
+		"BUILD": 0
 	},
 	"KSP_VERSION": {
 		"MAJOR": 1,
 		"MINOR": 12,
-		"PATCH": 99
+		"PATCH": 0
 	},
 	"KSP_VERSION_MIN": {
 		"MAJOR": 1,
 		"MINOR": 12,
 		"PATCH": 0
+	},
+	"KSP_VERSION_MAX": {
+		"MAJOR": 1,
+		"MINOR": 12,
+		"PATCH": 99
 	}
 }
