@@ -86,9 +86,8 @@ namespace KSPPluginFramework
             EpochDayOfYear = 1;
             SecondsPerMinute = 60;
             MinutesPerHour = 60;
-
-            HoursPerDay = GameSettings.KERBIN_TIME ? 6 : 24;
-            DaysPerYear = GameSettings.KERBIN_TIME ? 426 : 365;
+            HoursPerDay = (int)(Planetarium.fetch.Home.solarDayLength / MinutesPerHour / SecondsPerMinute);
+            DaysPerYear = (int)(Planetarium.fetch.Home.orbit.period / HoursPerDay / MinutesPerHour / SecondsPerMinute);
         }
 
         /// <summary>Sets the Date Structure to be Earth based - Accepts Epoch date as string</summary>
