@@ -424,30 +424,20 @@ namespace CactEye2
             int h;
             int m;
             int s;
-            if (GameSettings.KERBIN_TIME)
-            {
-                y = (int)Math.Floor(t / 9201600); //426 days per Kerbin year
-                d = (int)Math.Floor((t - (y * 9201600)) / 21600); //6 hours per Kerbin day
-                h = (int)Math.Floor((t - (y * 9201600) - (d * 21600)) / 3600);
-                m = (int)Math.Floor((t - (y * 9201600) - (d * 21600) - (h * 3600)) / 60);
-                s = (int)Math.Floor(t - (y * 9201600) - (d * 21600) - (h * 3600) - (m * 60));
-                y += 1; //starts from year 1
-                d += 1; //no day 0 either
+            const double secondsPerMinute = 60.0;
+            const double secondsPerHour = 3600.0;
+            double secondsPerDay = Planetarium.fetch.Home.solarDayLength;
+            double secondsPerYear = Planetarium.fetch.Home.orbit.period;
 
-                return y + "y-" + d + "d-" + h + "h-" + m + "m-" + s + "s";
-            }
-            else
-            {
-                y = (int)Math.Floor(t / 31536000); //365 days per Earth year
-                d = (int)Math.Floor((t - (y * 31536000)) / 86400); //24 hours per Earth day
-                h = (int)Math.Floor((t - (y * 31536000) - (d * 86400)) / 3600);
-                m = (int)Math.Floor((t - (y * 31536000) - (d * 86400) - (h * 3600)) / 60);
-                s = (int)Math.Floor(t - (y * 31536000) - (d * 86400) - (h * 3600) - (m * 60));
-                y += 1; //starts from year 1
-                d += 1; //no day 0 either
+            y = (int)Math.Floor(t / secondsPerYear);
+            d = (int)Math.Floor((t - (y * secondsPerYear)) / secondsPerDay); //6 hours per Kerbin day
+            h = (int)Math.Floor((t - (y * secondsPerYear) - (d * secondsPerDay)) / secondsPerHour);
+            m = (int)Math.Floor((t - (y * secondsPerYear) - (d * secondsPerDay) - (h * secondsPerHour)) / secondsPerMinute);
+            s = (int)Math.Floor(t - (y * secondsPerYear) - (d * secondsPerDay) - (h * secondsPerHour) - (m * secondsPerMinute));
+            y += 1; //starts from year 1
+            d += 1; //no day 0 either
 
-                return y + "y-" + d + "d-" + h + "h-" + m + "m-" + s + "s";
-            }
+            return y + "y-" + d + "d-" + h + "h-" + m + "m-" + s + "s";
         }
 
         public static void GenerateOccultationExp(CelestialBody planetBody)

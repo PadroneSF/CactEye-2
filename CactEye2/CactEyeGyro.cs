@@ -20,7 +20,7 @@ namespace CactEye2
         public float guiRate = 0.3f;
 
         [KSPField(isPersistant = false)]
-        public int lifeSpan = 90; // in Earth days
+        public int lifeSpan = 90; // in days
 
         [KSPField(isPersistant = true)]
         float OriginalPitchTorgue;
@@ -39,7 +39,7 @@ namespace CactEye2
         [UI_ProgressBar(minValue = 0f, maxValue = 1f, controlEnabled = false)]
         public float Lifetime = 1f;
 
-        private int SecondsToEarthDays = 86400; //seconds per day
+        private double SecondsToDays = Planetarium.fetch.Home.solarDayLength; //seconds per day
 
         [KSPEvent(active = false, externalToEVAOnly = true, guiActiveUnfocused = true, guiName = "Repair Gyroscope", unfocusedRange = 2)]
         public void RepairGyro()
@@ -84,7 +84,7 @@ namespace CactEye2
             OriginalYawTorgue = base.YawTorque;
             OriginalRollTorgue = base.RollTorque;
 
-            CreationTime = Planetarium.GetUniversalTime() + ((SecondsToEarthDays * lifeSpan) * Lifetime) - (SecondsToEarthDays * lifeSpan);
+            CreationTime = Planetarium.GetUniversalTime() + ((SecondsToDays * lifeSpan) * Lifetime) - (SecondsToDays * lifeSpan);
             print("creationTime: " + CreationTime + " /// time: " + Planetarium.GetUniversalTime());
         }
 
@@ -92,7 +92,7 @@ namespace CactEye2
         {
             base.OnUpdate();
 
-            if (((SecondsToEarthDays * lifeSpan) + CreationTime) < Planetarium.GetUniversalTime() && IsFunctional)
+            if (((SecondsToDays * lifeSpan) + CreationTime) < Planetarium.GetUniversalTime() && IsFunctional)
             {
                 Die();
             }
@@ -101,7 +101,7 @@ namespace CactEye2
             {
                 if (HighLogic.CurrentGame.Parameters.CustomParams<CactiSettings>().GyroDecay)
                 {
-                    Lifetime = (float)((CreationTime + (SecondsToEarthDays * lifeSpan) - Planetarium.GetUniversalTime()) / (SecondsToEarthDays * lifeSpan));
+                    Lifetime = (float)((CreationTime + (SecondsToDays * lifeSpan) - Planetarium.GetUniversalTime()) / (SecondsToDays * lifeSpan));
                 }
                 base.PitchTorque = OriginalPitchTorgue * (gyroScale + ((1 - gyroScale) * GyroSensitivity));
                 base.YawTorque = OriginalYawTorgue * (gyroScale + ((1 - gyroScale) * GyroSensitivity));
@@ -114,7 +114,7 @@ namespace CactEye2
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("Lifespan: " + ((GameSettings.KERBIN_TIME) ? ((lifeSpan * 4) + " Kerbin Days") : (lifeSpan + " Earth Days")));
+            sb.AppendLine("Lifespan: " + (lifeSpan + " Days"));
 
             sb.AppendLine();
 
