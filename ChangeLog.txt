@@ -1,5 +1,9 @@
 ChangeLog
 
+1.5.4
+	Thanks to forum user @Elkram for these patches
+		Patches to add the ModuleCargoPart to all the processors
+
 1.5.3.1
 	Thanks to github user @svm420 for this:
 		Change from hardcoded Date Values to dynamically seting those values from the home world in game
