@@ -39,7 +39,8 @@ namespace CactEye2
         [UI_ProgressBar(minValue = 0f, maxValue = 1f, controlEnabled = false)]
         public float Lifetime = 1f;
 
-        private double SecondsToDays = Planetarium.fetch.Home.solarDayLength; //seconds per day
+        private double SecondsToDays; // = Planetarium.fetch.Home.solarDayLength; //seconds per day
+
 
         [KSPEvent(active = false, externalToEVAOnly = true, guiActiveUnfocused = true, guiName = "Repair Gyroscope", unfocusedRange = 2)]
         public void RepairGyro()
@@ -83,6 +84,8 @@ namespace CactEye2
             OriginalPitchTorgue = base.PitchTorque;
             OriginalYawTorgue = base.YawTorque;
             OriginalRollTorgue = base.RollTorque;
+
+            SecondsToDays = Planetarium.fetch.Home.solarDayLength; //seconds per day
 
             CreationTime = Planetarium.GetUniversalTime() + ((SecondsToDays * lifeSpan) * Lifetime) - (SecondsToDays * lifeSpan);
             print("creationTime: " + CreationTime + " /// time: " + Planetarium.GetUniversalTime());

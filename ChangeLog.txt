@@ -1,5 +1,8 @@
 ChangeLog
 
+1.5.4.1
+	Fixed NullRef in the CactEyeGyro module, causing the gyros to not be there
+
 1.5.4
 	Thanks to forum user @Elkram for these patches
 		Patches to add the ModuleCargoPart to all the processors
