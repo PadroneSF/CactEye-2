@@ -1,5 +1,8 @@
 ChangeLog
 
+1.5.4.2
+	Fixed part conflict spacedust-telescope-1 with the same one from the Spacedust mod.
+
 1.5.4.1
 	Fixed NullRef in the CactEyeGyro module, causing the gyros to not be there
 
